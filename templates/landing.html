@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}" />
+    <title>MY AI chatbot</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="{% url 'home' %}">Nexi</a>
+        </div>
+        
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-line"></i>
+        </div>
+      </div>
+      {% if user.is_authenticated %}
+        <div class="nav__logo">
+          <b>welcome {{user.first_name}}</b>
+        </div>
+        {% endif %}
+      <ul class="nav__links" id="nav-links">
+        <li><a href="{% url 'home' %}">HOME</a></li>
+        <!-- <li><a href="#">ABOUT US</a></li> -->
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}">LOGIN</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="container__left">
+        <h1>Introducing Nexi</h1>
+        <div class="container__btn">
+          <a class="btn" href="{% url 'chatbot' %}">Try Nexi</a>
+        </div>
+      </div>
+      <div class="container__right">
+        <div class="images">
+          <img src="{% static 'image/0x0.webp' %}" alt="tent-1" class="tent-1" />
+          <img src="{% static 'image/COVER.png' %}" alt="tent-2" class="tent-2" />
+        </div>
+        <div class="content">
+          <h4>Inteligent | Responsive</h4>
+          <h2>Nexi AI</h2>
+          <h3>Your Smart AI</h3>
+          <p>
+            Provides instant responses to user queries, improving user satisfaction and engagement.</p>
+           <p>Ensures data privacy and security, protecting user information with robust encryption and security measures.
+          </p>
+        </div>
+      </div>
+      <!-- <div class="location">
+        <span><i class="ri-map-pin-2-fill"></i></span>
+        OUR LOCATION
+      </div>
+      <div class="socials">
+        <span>
+          <a href="#"><i class="ri-facebook-fill"></i></a>
+        </span>
+        <span>
+          <a href="#"><i class="ri-instagram-line"></i></a>
+        </span>
+        <span>
+          <a href="#"><i class="ri-twitter-fill"></i></a>
+        </span>
+      </div> -->
+    </div>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{% static 'js/landing.js' %}"></script>
+  </body>
+</html>
