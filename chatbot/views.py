@@ -38,10 +38,13 @@ def register(request):
         # Check if username or email already exists
         if User.objects.filter(username=uname).exists():
             messages.error(request, "Username already exists!")
+            return redirect('login')
         elif User.objects.filter(email=email).exists():
             messages.error(request, "Email already exists!")
+            return redirect('login')
         elif pass1 != pass2:
             messages.error(request, "Your password and confirm password are not the same!")
+            return redirect('login')
         else:
             # Create new user
             my_user = User(username=uname, email=email, first_name=first_name, last_name=last_name)
