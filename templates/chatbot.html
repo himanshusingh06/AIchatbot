@@ -88,7 +88,7 @@
         </div>
         {% if user.is_authenticated %}
         <div class="nav__logo">
-            <b>welcome {{user.first_name}}</b>
+            <b>welcome {{user.first_name}} {% if user.is_pro_user %} <span class="pro-user">PRO</span>{% endif %}</b>
         </div>
         {% endif %}
         <ul class="nav__links" id="nav-links">
@@ -254,6 +254,31 @@
             menuBtnIcon.setAttribute("class", "ri-menu-line");
         });
     </script>
+    <script>
+        document.querySelector('.pro-btn').addEventListener('click', function (e) {
+            e.preventDefault();
+            this.classList.add('animate');
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 1000); // Adjust the duration to match the animation time
+        });
+    </script>
+    <style>
+        .pro-user {
+            color: gold;
+            font-weight: bold;
+        }
+
+        .animate {
+            animation: subscribeAnimation 1s forwards;
+        }
+
+        @keyframes subscribeAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(2); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </body>
 
 </html>

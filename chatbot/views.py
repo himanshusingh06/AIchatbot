@@ -10,7 +10,11 @@ from dotenv import load_dotenv
 import os
 from django.utils import timezone
 from .models import Chat
-
+from django.core.mail import EmailMessage 
+from django.conf import settings
+from .models import ContactMessage
+from django.contrib.auth.decorators import login_required
+from .models import ProUser
 # Load environment variables
 load_dotenv()
 
@@ -147,3 +151,44 @@ model = genai.GenerativeModel(
     # safety_settings = Adjust safety settings
     # See https://ai.google.dev/gemini-api/docs/safety-settings
 )
+
+def send_mail_to_admin(user_name, user_email, mobile_number,subject,user_message):
+    
+    message_body = f'Form filled by {user_name}--- with the email {user_email}.\n\nMobile number -- {mobile_number}\n\nThe Message provided is :\n {user_message}'
+    message = EmailMessage(
+        subject=f'New form filled by {user_name}--- with subject {subject}',
+        body=message_body,
+        from_email=settings.EMAIL_HOST_USER,
+        to=['himanshusinghwork365@gmail.com']
+    )
+    message.send()
+
+def contact(request):
+    if request.method == 'POST':
+        user_name = request.POST.get('name')
+        user_email = request.POST.get('email')
+        mobile_number = request.POST.get('mobile_number')
+        subject = request.POST.get('subject')
+        user_message = request.POST.get('message')
+        
+        
+        # Save the message to the database
+        ContactMessage.objects.create(
+            user_name=user_name,
+            user_email=user_email,
+            mobile_number=mobile_number,
+            subject=subject,
+            user_message=user_message
+        )
+        
+        send_mail_to_admin(user_name, user_email, mobile_number, subject, user_message)
+        return redirect('home')
+    else:
+        return render(request, 'contact.html')
+
+@login_required(login_url='login')
+def subscribe_to_pro(request):
+    user = request.user
+    if not ProUser.objects.filter(user=user).exists():
+        ProUser.objects.create(user=user)
+    return redirect('home')

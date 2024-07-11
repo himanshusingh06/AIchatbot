@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        :root {
+            --bg-color: #fdfdfd;
+            --text-color: #333;
+            --main-color: #754ef9;
+            --main-color-hover: #5d3ecf; /* Slightly darker shade for hover effect */
+            --white-color: #fdfdfd;
+            --shadow-color: rgba(0, 0, 0, .2);
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .header-bar {
+            background-color: var(--main-color);
+            color: var(--white-color);
+            padding: 10px 0;
+            width: 100%;
+            text-align: center;
+        }
+        .container {
+            background-color: var(--white-color);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            border-top: 4px solid var(--main-color);
+            border-bottom: 4px solid var(--main-color);
+            margin-top: 20px;
+        }
+        h1 {
+            margin: 0;
+        }
+        h2 {
+            color: var(--main-color);
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        a.button {
+            display: inline-block;
+            background-color: var(--main-color);
+            color: var(--white-color);
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        a.button:hover {
+            background-color: var(--main-color-hover); /* Use the defined hover color */
+        }
+        .nav {
+            background-color: var(--white-color);
+            box-shadow: 0 0 10px var(--shadow-color);
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            transition: top 0.3s;
+            border-top: 5px solid var(--main-color);
+            border-bottom: 5px solid var(--main-color);
+            margin-bottom: 5px;
+            width: 100%;
+        }
+
+        
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .nav button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 20px;
+        }
+        [data-theme="dark"] {
+            --main-color: #754ef9;
+            --white-color: #100931;
+            --bg-color: #0b061f;
+            --text-color: #fdfdfd;
+            --shadow-color: rgba(0, 0, 0, .7);
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .contact-info, .contact-form {
+            margin: 20px 0;
+        }
+        .contact-info p {
+            line-height: 1.6;
+        }
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-form label {
+            margin: 10px 0 5px;
+        }
+        .contact-form input, .contact-form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .contact-form button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav" id="navbar">
+        <div>
+            <a href="{% url 'home' %}"><strong>Nexi</strong></a>
+            <a href="{% url 'home' %}">Home</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="text-decoration-none">LOGOUT</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="text-decoration-none">LOGIN</a>
+            {% endif %}
+        </div>
+        <button onclick="toggleTheme()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#754ef9"><path d="M492-280q83 0 141.5-58.5T692-480q0-83-58.5-141.5T492-680q-22 0-43 4.5T408-662q54 25 85.5 74T525-480q0 59-31.5 108T408-298q20 9 41 13.5t43 4.5ZM480-28 346-160H160v-186L28-480l132-134v-186h186l134-132 134 132h186v186l132 134-132 134v186H614L480-28Zm0-112 100-100h140v-140l100-100-100-100v-140H580L480-820 380-720H240v140L140-480l100 100v140h140l100 100Zm0-340Z"/></svg></button>
+    </div>
+    <div class="container">
+        <h1>Contact Us</h1>
+        <div class="contact-info">
+            <h2>Our Contact Information</h2>
+            <p><strong>Address:</strong> DSATM, Banglore, India</p>
+            <p><strong>Phone:<a href="tel:+917004349469"></strong> +91 7004349469</p></a>
+            <p><strong>Email:<a href="mailto:himanshuks062@gmail.com"></strong> himanshukso62@gmail.com</p></a>
+        </div>
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form action="contact" method="POST">
+                {% csrf_token %}
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required placeholder="Enter Your Name"> 
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Enter Your Email">
+                <label for="email">Phone</label>
+                <input type="tel" id="mobile_number" name="mobile_number" required placeholder="Enter Your Phone Number">
+                <label for="email">Subject</label>
+                <input type="text" id="subject" name="subject" required placeholder="Enter Your Subject">
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required placeholder="Enter Your Message"></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

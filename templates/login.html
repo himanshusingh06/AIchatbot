@@ -12,8 +12,12 @@
 <body style="background-image: url('../static/image/bg.jpg')">
     <div class="glassmorphic-container form">
         {% for message in messages %}
-                        <div style="color: #c00427;">{{ message }}</div>
-                    {% endfor %}
+            {% if message.tags == 'success' %}
+                <div style="color: #0ec435;">{{ message }}</div>
+            {% else %}
+                <div style="color: #c00427;">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
     <div class="form">
         <p class="forgot"><a href="{% url 'home' %}"><--Back to HOME</a></p>
         <ul class="tab-group">
@@ -67,7 +71,7 @@
                         <label>Password<span class="req">*</span></label>
                         <input type="password" required autocomplete="off" name="pass"/>
                     </div>
-                    <p class="forgot"><a href="#">Forgot Password?</a></p>
+                    <p class="forgot"><a href="{% url 'reset_password' %}">Forgot Password?</a></p>
                     <button class="button button-block">Log In</button>
                 </form>
             </div>
